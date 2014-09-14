@@ -6,14 +6,12 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/imageviewer_icon"
+        android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/Theme.Sherlock.Light.DarkActionBar" >
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".activities.HomeActivity"
-            android:label="@string/app_name" android:uiOptions="splitActionBarWhenNarrow">
-            <meta-data android:name="android.support.UI_OPTIONS"
-                android:value="splitActionBarWhenNarrow" />
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
