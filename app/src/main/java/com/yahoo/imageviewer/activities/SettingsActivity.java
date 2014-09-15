@@ -30,7 +30,7 @@ public class SettingsActivity extends Activity implements AdapterView.OnItemSele
          spImageSize = (Spinner) findViewById(R.id.spImageSize);
          spImageType = (Spinner) findViewById(R.id.spImageType);
          spColorFilter = (Spinner) findViewById(R.id.spColorFilter);
-        etSiteFiler = (EditText)findViewById(R.id.etSiteFilter);
+         etSiteFiler = (EditText)findViewById(R.id.etSiteFilter);
 
          spImageSize.setOnItemSelectedListener(this);
          spImageType.setOnItemSelectedListener(this);
@@ -55,34 +55,28 @@ public class SettingsActivity extends Activity implements AdapterView.OnItemSele
         //Image Size
         ArrayAdapter<CharSequence> imageSizeAdapter = ArrayAdapter.createFromResource(this,
                 R.array.image_size, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
         imageSizeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
         spImageSize.setAdapter(imageSizeAdapter);
 
 
         //ImageType
         ArrayAdapter<CharSequence> imageTypeAdapter = ArrayAdapter.createFromResource(this,
                 R.array.image_type, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
         imageTypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
         spImageType.setAdapter(imageTypeAdapter);
 
 
         //ColorFilter
         ArrayAdapter<CharSequence> colorFilterAdapter = ArrayAdapter.createFromResource(this,
                 R.array.color_filter, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
         colorFilterAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
         spColorFilter.setAdapter(colorFilterAdapter);
 
     }
 
     //LAYOUT METHOD
     public void onClickSaveSettings(View v){
-        Toast.makeText(this,"Return Acked!",Toast.LENGTH_SHORT).show();
+        this.finish();
     }
 
 
