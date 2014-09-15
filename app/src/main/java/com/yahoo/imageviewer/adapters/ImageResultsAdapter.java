@@ -1,7 +1,6 @@
 package com.yahoo.imageviewer.adapters;
 
 import android.content.Context;
-import android.media.Image;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
