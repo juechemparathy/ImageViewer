@@ -21,6 +21,9 @@ public class ImageDisplayActivity extends Activity {
         ImageResult result = (ImageResult)getIntent().getSerializableExtra("result");
         ImageView imageView = (ImageView)findViewById(R.id.ivImageDisplay);
         Picasso.with(this).load(result.fullUrl).into(imageView);
+
+        getActionBar().setBackgroundDrawable(getWallpaper());
+
     }
 
     @Override

@@ -5,7 +5,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_image_display">Full Image</string>
-    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_settings">Settings</string>
 
     <string-array name="image_size">
         <item>Small</item>
@@ -22,10 +22,10 @@
     </string-array>
 
     <string-array name="image_type">
-        <item>jpg</item>
-        <item>png</item>
-        <item>bmp</item>
-        <item>jpeg</item>
+        <item>Face</item>
+        <item>Live art</item>
+        <item>Photo</item>
+        <item>Clipart</item>
     </string-array>
 
 </resources>

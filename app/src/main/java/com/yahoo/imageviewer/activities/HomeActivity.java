@@ -17,6 +17,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.yahoo.imageviewer.R;
 import com.yahoo.imageviewer.adapters.ImageResultsAdapter;
 import com.yahoo.imageviewer.models.ImageResult;
+import com.yahoo.imageviewer.models.Settings;
 import com.yahoo.imageviewer.utilities.EndlessScrollListener;
 
 import org.apache.http.Header;
@@ -35,6 +36,8 @@ public class HomeActivity extends Activity {
     ArrayList<ImageResult> imageResultsTemp = new ArrayList<ImageResult>();
     ImageResultsAdapter imageResultsAdapter = null;
     String query;
+    Settings settings = new Settings();
+    private final int REQUEST_CODE = 1234567;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +60,6 @@ public class HomeActivity extends Activity {
             }
         });
 
-//        getActionBar().setCustomView(R.layout.actionbar);
         getActionBar().setBackgroundDrawable(getWallpaper());
         gvSearchResultView.setOnScrollListener(new EndlessScrollListener() {
             @Override
@@ -87,7 +89,11 @@ public class HomeActivity extends Activity {
         switch (item.getItemId()) {
             // action with ID action_refresh was selected
             case R.id.action_refresh:
-                Toast.makeText(this, "Refresh selected", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Reset settings and query", Toast.LENGTH_SHORT).show();
+                imageResultsAdapter.clear();
+                settings = new Settings();
+                etSearch.setText("");
+                query="";
                 break;
             // action with ID action_settings was selected
             case R.id.action_settings:
@@ -95,7 +101,8 @@ public class HomeActivity extends Activity {
                 //Take the user back to search page with settings result.
 //                Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT).show();
                 Intent i  = new Intent(this,SettingsActivity.class);
-                startActivity(i);
+                i.putExtra("settings",settings);
+                startActivityForResult(i, REQUEST_CODE);
                 break;
             default:
                 break;
@@ -103,10 +110,52 @@ public class HomeActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // REQUEST_CODE is defined above
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+            // Extract name value from result extras
+            settings = (Settings)data.getSerializableExtra("settings");
+        }
+    }
+
+    private String appendSettings(String url){
+        if(settings.getColorFilter()!=null && settings.getColorFilter().length()>0){
+            url=url+"&imgcolor="+settings.getColorFilter();
+        }
+
+        if(settings.getImageSize()!=null && settings.getImageSize().length()>0){
+            if("Small".equalsIgnoreCase(settings.getImageSize())) {
+                url = url + "&imgsz=small";
+            }
+
+            if("Medium".equalsIgnoreCase(settings.getImageSize())) {
+                url = url + "&imgsz=medium";
+            }
+
+            if("Large".equalsIgnoreCase(settings.getImageSize())) {
+                url = url + "&imgsz=xxlarge";
+            }
+
+            if("Extra Large".equalsIgnoreCase(settings.getImageSize())) {
+                url = url + "&imgsz=huge";
+            }
+
+        }
+
+        if(settings.getImageType()!=null && settings.getImageType().length()>0){
+            url=url+"&imgtype="+settings.getImageType();
+        }
+        return url;
+    }
+
     private void getImagesFromGoogleApi(int start){
         // https://ajax.googleapis.com/ajax/services/search/images
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get("https://ajax.googleapis.com/ajax/services/search/images?v=1.0&rsz=8&q="+ query+"&start="+(start*8),new JsonHttpResponseHandler(){
+        String url = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&rsz=8&q="+ query+"&start="+(start*8);
+        url =  appendSettings(url);
+        Log.d("DEBUG",url);
+        client.get(url,new JsonHttpResponseHandler(){
             JSONArray imageResultsJson = null;
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -132,6 +181,7 @@ public class HomeActivity extends Activity {
         imageResultsAdapter.clear(); //Clearing before every click on search button
         query = etSearch.getText().toString();
         if(query == null || query.length()==0){
+            imageResultsTemp=new ArrayList<ImageResult>();
             Toast.makeText(this,"Please enter search query",Toast.LENGTH_SHORT).show();
         }
         getImagesFromGoogleApi(start);
