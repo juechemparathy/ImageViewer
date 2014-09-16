@@ -14,6 +14,7 @@
         android:adjustViewBounds="true"
         android:id="@+id/ivImage"
 
+
         />
 
     <TextView
@@ -24,6 +25,7 @@
         android:textSize="9sp"
         android:maxLines="4"
         android:ellipsize="end"
+        android:textColor="@android:color/white"
         />
 
 </LinearLayout>

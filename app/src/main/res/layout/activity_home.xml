@@ -7,29 +7,29 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".HomeActivity"
+    android:background="@android:color/black"
     android:id="@+id/homeLayout">
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/etSearch"
-        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_toLeftOf="@+id/btnSearch"
-        android:layout_toStartOf="@+id/btnSearch"
-        android:layout_alignBottom="@+id/btnSearch" />
+        android:layout_alignBottom="@+id/btnSearch"
+        android:textColor="@android:color/white"
+        />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnSearch"
-        android:text="Search"
-        android:adjustViewBounds="true"
+    <ImageButton android:id="@+id/btnSearch"
         android:onClick="onClickBtnSearch"
+        android:src="@drawable/search_icon"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/gvImageResults"
-        android:layout_alignEnd="@+id/gvImageResults" />
+        android:layout_alignParentRight="true"
+        android:scaleType="fitXY"
+        android:layout_height="50dp"
+        android:layout_width="50dp"
+        android:layout_alignParentEnd="true"></ImageButton>
 
     <GridView
         android:id="@+id/gvImageResults"
