@@ -5,12 +5,15 @@
     android:orientation="vertical">
 
     <ImageView
-        android:layout_width="75dp"
+        android:layout_width="fill_parent"
         android:layout_height="75dp"
         android:scaleType="fitXY"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        android:contentDescription="ImageResult"
         android:adjustViewBounds="true"
-        android:src="@drawable/ic_launcher"
         android:id="@+id/ivImage"
+
         />
 
     <TextView
@@ -18,7 +21,8 @@
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:text="Image Text"
-        android:maxLines="2"
+        android:textSize="9sp"
+        android:maxLines="4"
         android:ellipsize="end"
         />
 
