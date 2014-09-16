@@ -2,7 +2,7 @@ ImageViewer
 ===========
 
 An App to search and view images.
-
+![Video Walkthrough](AndroidClass-ImageViewer.gif)
 
     *User can enter a search query that will display a grid of image results from the Google Image API.
     *User can click on "settings" which allows selection of advanced search options to filter results
